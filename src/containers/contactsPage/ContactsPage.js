@@ -11,13 +11,21 @@ export const ContactsPage = ({ contactList, handleAddContact }) => {
   const [currentEmail, setCurrentEmail] = useState('');
   const [isDuplicate, setIsDuplicate] = useState(false);
 
-   useEffect(() => {
-    for (let i = 0; i < contactList.length; i++) {
-      if (contactList[i].name.includes(currentName.trim().toLowerCase())) {
-        setIsDuplicate(true);
+  useEffect(() => {
+    const nameIsDuplicate = () => {
+      const found = contactList.find((contact) => contact.name === currentName);
+      if (found !== undefined) {
+        return true;
       }
+      return false;
+    };
+
+    if (isDuplicate()) {
+      setIsDuplicate(true);
+    } else {
+      setIsDuplicate(false);
     }
-  }, [currentName, contactList]);
+  }, [currentName, contactList, isDuplicate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
