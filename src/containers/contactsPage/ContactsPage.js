@@ -20,7 +20,7 @@ export const ContactsPage = ({ contactList, handleAddContact }) => {
       return false;
     };
 
-    if (isDuplicate()) {
+    if (nameIsDuplicate()) {
       setIsDuplicate(true);
     } else {
       setIsDuplicate(false);
